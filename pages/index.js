@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { client, recommendedProfiles } from "../api";
 import Link from "next/link";
+import Image from "next/Image";
 
 export default function Home() {
   const [profiles, setProfiles] = useState([]);
@@ -26,6 +27,22 @@ export default function Home() {
         <Link href={`/profile/${profile.id}`} key="index">
           <a>
             <div>
+              {profile.picture ? (
+                <Image
+                  src={profile.picture.original.url}
+                  width="60px"
+                  height="60px"
+                  alt="profile image"
+                />
+              ) : (
+                <div
+                  style={{
+                    width: "60px",
+                    height: "60px",
+                    backgroundColor: "black",
+                  }}
+                />
+              )}
               <h4>{profile.handle}</h4>
               <p>{profile.bio}</p>
             </div>
