@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { client, recommendedProfiles } from "../api";
 import Link from "next/link";
-import Image from "next/Image";
+import Image from "next/image";
 
 export default function Home() {
   const [profiles, setProfiles] = useState([]);
@@ -22,33 +22,41 @@ export default function Home() {
 
   return (
     <div>
-      <h1>Lens Protocol</h1>
-      {profiles.map((profile, index) => (
-        <Link href={`/profile/${profile.id}`} key="index">
-          <a>
-            <div>
-              {profile.picture ? (
-                <Image
-                  src={profile.picture.original.url}
-                  width="60px"
-                  height="60px"
-                  alt="profile image"
-                />
-              ) : (
-                <div
-                  style={{
-                    width: "60px",
-                    height: "60px",
-                    backgroundColor: "black",
-                  }}
-                />
-              )}
-              <h4>{profile.handle}</h4>
-              <p>{profile.bio}</p>
-            </div>
-          </a>
-        </Link>
-      ))}
+      <h1 className=" text-center text-3xl font-bold uppercase mb-5">Lens Protocol Sandbox</h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mx-4 py-10">
+        {profiles.map((profile, index) => (
+            <div
+            key={index}
+            className="border-2 border-black shadow rounded-xl overflow-hidden"
+          >
+          <Link href={`/profile/${profile.id}`}>
+            <a>
+              <div className="p-4">
+                {profile.picture && profile.picture.original ? (
+                  <Image
+                    className="rounded-full"
+                    src={profile.picture.original.url}
+                    width="60px"
+                    height="60px"
+                    alt="profile image"
+                  />
+                ) : (
+                  <div
+                    style={{
+                      width: "60px",
+                      height: "60px",
+                      backgroundColor: "black",
+                    }}
+                  />
+                )}
+                <h4>{profile.handle}</h4>
+                <p>{profile.bio}</p>
+              </div>
+            </a>
+          </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
