@@ -52,7 +52,7 @@ export default function Home() {
                       className="rounded-full"
                     />
                   )}
-                  <h4 className="font-bold text-xl">{profile.handle}</h4>
+                  <h4 className="font-bold text-xl mt-2">{profile.handle}</h4>
                   <hr className="my-2"/>
                   <p>{profile.bio}</p>
                 </div>
