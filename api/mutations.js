@@ -101,23 +101,17 @@ const createUnfollowTypedData = `
 `;
 
 const createProfile = `
-mutation CreateProfile {
-  createProfile(request:{ 
-                handle: "devjoshstevens",
-                profilePictureUri: null,   
-                followModule: {
-                     freeFollowModule: true
-                  }
-                }) {
-    ... on RelayerResult {
-      txHash
+  mutation($request: CreateProfileRequest!) {
+    createProfile(request: $request) {
+      ... on RelayerResult {
+        txHash
+      }
+      ... on RelayError {
+        reason
+      }
+      __typename
     }
-    ... on RelayError {
-      reason
-    }
-    __typename
   }
-}
 `;
 
 export {
@@ -126,5 +120,5 @@ export {
   refresh,
   createUnfollowTypedData,
   broadcast,
-  createProfile
+  createProfile,
 };

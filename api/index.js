@@ -1,34 +1,33 @@
-import { createClient as createUrqlClient } from 'urql'
-import { refreshAuthToken } from '../utils'
+import { createClient as createUrqlClient } from "urql";
+import { refreshAuthToken } from "../utils";
 
-export const APIURL = "https://api.lens.dev"
-export const STORAGE_KEY = "LH_STORAGE_KEY"
+export const APIURL = "https://api-mumbai.lens.dev/";
+export const STORAGE_KEY = "LH_STORAGE_KEY";
 
 export const basicClient = new createUrqlClient({
-  url: APIURL
-})
+  url: APIURL,
+});
 
 export async function createClient() {
-  const storageData = JSON.parse(localStorage.getItem(STORAGE_KEY))
+  const storageData = JSON.parse(localStorage.getItem(STORAGE_KEY));
   if (storageData) {
     try {
-      const { accessToken } = await refreshAuthToken()
+      const { accessToken } = await refreshAuthToken();
       const urqlClient = new createUrqlClient({
         url: APIURL,
         fetchOptions: {
           headers: {
-            'x-access-token': `Bearer ${accessToken}`
+            "x-access-token": `Bearer ${accessToken}`,
           },
         },
-      })
-      return urqlClient
+      });
+      return urqlClient;
     } catch (err) {
-      console.log('error refreshing token: ', err)
+      console.log("error refreshing token: ", err);
     }
   } else {
-    return basicClient
+    return basicClient;
   }
-
 }
 
 export {
@@ -39,13 +38,14 @@ export {
   searchPublications,
   explorePublications,
   doesFollow,
-  getChallenge
-} from './queries'
+  getChallenge,
+} from "./queries";
 
 export {
   followUser,
   authenticate,
   refresh,
   createUnfollowTypedData,
-  broadcast
-} from './mutations'
+  broadcast,
+  createProfile,
+} from "./mutations";

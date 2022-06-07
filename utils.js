@@ -46,6 +46,10 @@ export function getSigner() {
   return provider.getSigner();
 }
 
+export const getAddressFromSigner = () => {
+  return getSigner().address;
+};
+
 export function signedTypeData (domain, types, value) {
   const signer = getSigner();
   return signer._signTypedData(
@@ -58,6 +62,8 @@ export function signedTypeData (domain, types, value) {
 export function splitSignature(signature) {
   return utils.splitSignature(signature)
 }
+
+
 
 export function generateRandomColor(){
   let maxVal = 0xFFFFFF; // 16777215

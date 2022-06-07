@@ -56,9 +56,9 @@ export default function Profile() {
   console.log('user profile', profile)
 
   return (
-    <div className="container mx-auto p-20 mt-5 border-2 border-black rounded-xl">
+    <div className="container md:mx-auto p-20 mt-5 border-2 border-black rounded-xl">
       {profile.picture ? (
-        <div className="flex">
+        <div className="md:flex">
           <Image
             src={profile.picture.original.url}
             width="200px"
@@ -66,35 +66,37 @@ export default function Profile() {
             alt="proifle pic"
             className="rounded-full"
           />
-          <div className="flex m-20">
-            <p className="mx-5 text-3xl">
+          <div className="flex mt-20 ml-10">
+            <p className="mx-5 text-2xl">
               <span className="font-bold">Followers:</span>{" "}
               {profile.stats.totalFollowers}
             </p>
-            <p className="mx-5 text-3xl">
+            <p className="mx-5 text-2xl">
               <span className="font-bold">Following:</span>{" "}
               {profile.stats.totalFollowing}
             </p>
-            <p className="mx-5 text-3xl">
+            <p className="mx-5 text-2xl">
               <span className="font-bold">Posts:</span>{" "}
               {profile.stats.totalPosts}
             </p>
           </div>
         </div>
       ) : (
-        <div>
+        <div className="md:flex">
           <div
             style={{
               width: "200px",
               height: "200px",
               backgroundColor: "black",
             }}
+            className="rounded-full"
           ></div>
-          <p>
+          <div className="md:flex m-20">
+          <p className="mx-5 text-3xl">
             <span className="font-bold">Followers:</span>{" "}
             {profile.stats.totalFollowers}
           </p>
-          <p>
+          <p className="mx-5 text-3xl">
             <span className="font-bold">Following:</span>{" "}
             {profile.stats.totalFollowing}
           </p>
@@ -102,11 +104,14 @@ export default function Profile() {
               <span className="font-bold">Posts:</span>{" "}
               {profile.stats.totalPosts}
             </p>
+          </div>
+         
         
         </div>
       )}
+     
       <div className="">
-        <div className="flex my-10">
+        <div className="md:flex my-10">
           <h4 className="font-bold text-4xl pb-4 mr-5">{profile.handle}</h4>
           <button
             className="bg-blue-500 hover:bg-blue-300 border-2 border-black text-white font-bold py-2 px-4 rounded-3xl mx-5 uppercase"
@@ -121,6 +126,8 @@ export default function Profile() {
             UnFollow User
           </button>
         </div>
+    
+     
 
         <hr className="my-4" />
         <p className="p-4 font-bold">{profile.bio}</p>

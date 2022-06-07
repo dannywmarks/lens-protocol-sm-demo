@@ -110,7 +110,8 @@ function MyApp({ Component, pageProps }) {
                       <span className="text-white uppercase font-bold mr-3">
                         User:
                       </span>
-                      {userAddress}
+                      {userAddress && userAddress.slice(0,5) + '...' + userAddress.slice(38,42)}
+                    
                     </div>
                   )}
                 </div>
@@ -210,7 +211,7 @@ function MyApp({ Component, pageProps }) {
               className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1"
               id="mobile-menu-2"
             >
-              <ul className="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium uppercase">
+              <ul className="flex flex-col mt-4 md:flex-row md:space-x-2 md:mt-0 md:text-sm md:font-medium uppercase">
                 <Link href="/create">
                   <a
                     className="block py-2 pr-4 pl-3 text-white hover:text-blue-500"
@@ -226,7 +227,7 @@ function MyApp({ Component, pageProps }) {
                 </Link>
                 <Link href="/">
                   <a className="block py-2 pr-4 pl-3 text-white hover:text-blue-500">
-                    ProfileS
+                    Profiles
                   </a>
                 </Link>
               </ul>
