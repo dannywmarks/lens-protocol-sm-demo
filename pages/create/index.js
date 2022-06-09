@@ -1,30 +1,38 @@
-import { useState } from "react";
-import { createProfile as createProfileQuery } from "../../api/";
-import { client } from "../../api/";
+import { useState, useContext } from "react";
+import { createProfile as createProfileQuery, basicClient } from "../../api/";
+import { AppContext } from "../../context";
+
+import { prettyJSON } from "../../utils";
 
 const Create = () => {
+  const state = useContext(AppContext);
+
   const [formInput, updateFormInput] = useState({
-    username: "",
+    handle: "",
     profilePictureUri: "",
+    followNFTURI: "",
+    profilePictureUri: "",
+    followModule: {
+      revertFollowModule: true,
+    },
   });
 
-  async function createProfile() {
-    try {
-      const response = await client
-        .mutation(createProfileQuery, {
-          request: {
-            handle: formInput.username,
-            profilePictureUri: formInput.profilePictureUri,
-            followModule: {
-              revertFollowModule: true,
-            },
-          },
-        })
-        .toPromise();
-    } catch (error) {
-      console.log({ error });
-    }
+  function createProfileRequest(formInput) {
+    return basicClient.mutation(createProfileQuery, {
+      request: formInput,
+    });
   }
+
+  const createProfile = async () => {
+    const address = state.userAddress;
+    console.log("create profile: address", address, formInput);
+
+    const createProfileResult = await createProfileRequest(
+      formInput
+    ).toPromise();
+
+    prettyJSON("create profile: result", createProfileResult.data);
+  };
 
   return (
     <div className="container mx-auto px-4">
@@ -38,7 +46,7 @@ const Create = () => {
               placeholder="User Name"
               className="mt-8 rounded p-4 border-black border-4"
               onChange={(e) =>
-                updateFormInput({ ...formInput, username: e.target.value })
+                updateFormInput({ ...formInput, handle: e.target.value })
               }
             />
             {/* <textarea

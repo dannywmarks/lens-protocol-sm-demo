@@ -73,3 +73,7 @@ export function generateRandomColor(){
   let randColor = randomNumber.padStart(6, 0);   
   return `#${randColor.toUpperCase()}`
 }
+
+export const prettyJSON = (message, obj) => {
+  console.log(message, JSON.stringify(obj, null, 2));
+};
